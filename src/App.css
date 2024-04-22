@@ -3,7 +3,10 @@
   font-family: Roboto Mono;
   color: rgb(67 64 64);
 }
-
+.Banner {
+  display: flex;
+  justify-content: space-between;
+}
 .Banner nav {
   display: flex;
   align-items: center;
@@ -41,5 +44,52 @@
 }
 .Logo {
   display: flex;
-  height: 140px;
+  height: 205px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+form h2 {
+  font-size: 100px;
+}
+form input {
+  font-family: Roboto Mono;
+  color: rgb(67 64 64);
+  font-size: 0.9em;
+  height: 30px;
+}
+form label {
+  width: 200px;
+}
+.form-info-section {
+  display: flex;
+  align-items: center;
+  gap: 8%;
+}
+form button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: Roboto Mono;
+  font-size: 1.4em;
+  border-radius: 2px;
+  width: 10%;
+  height: 58px;
+  color: aliceblue;
+  background-color: rgb(67 64 64);
+}
+form button:hover {
+  color: rgb(67 64 64);
+  background-color: aliceblue;
+  border-color: rgb(67 64 64);
+  cursor: pointer;
+}
+.form-button {
+  padding-top: 65px;
+  width: 100%;
 }
