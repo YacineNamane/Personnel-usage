@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import AddArticleForm from "./AddArticle";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function ModalAjout() {
   const [show, setShow] = useState(false);
 
@@ -17,14 +19,12 @@ function ModalAjout() {
 
   return (
     <div>
-      <div className="button-add-container">
-        <Button variant="primary" onClick={handleShow}>
-          Ajouter un article !
-        </Button>
-      </div>
+      <Button className="btn custom-btn" onClick={handleShow}>
+        Ajouter un article!
+      </Button>
       {/* Arrière-plan de la page */}
       <Modal
-        dialogClassName="custom-modal"
+        dialogClassName="custom-modal modal-lg"
         show={show}
         onHide={handleClose}
         backdrop="static"
@@ -32,8 +32,11 @@ function ModalAjout() {
         centered
         scrollable
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Partager un article</Modal.Title>
+        <Modal.Header closeButton={false}>
+          <Modal.Title>
+            <div>Partager un article</div>
+            <div className="btn-close" onClick={handleClose}></div>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <AddArticleForm />

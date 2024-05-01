@@ -14,6 +14,9 @@ function AddArticleForm() {
     };
     reader.readAsDataURL(file);
   };
+  const handleChooseFile = () => {
+    document.getElementById("fileInput").click();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,11 +53,19 @@ function AddArticleForm() {
         />
       </label>
       <label>
-        Image:
+        {/* Bouton personnalisé pour choisir un fichier */}
+        <div className="button-add-image">
+          <button type="button" onClick={handleChooseFile}>
+            + Image
+          </button>
+        </div>
+        {/* Champ de saisie caché pour le téléchargement de fichiers */}
         <input
+          id="fileInput"
           type="file"
           onChange={handleImageChange}
           accept="image/*"
+          style={{ display: "none" }}
           required
         />
       </label>
@@ -74,7 +85,9 @@ function AddArticleForm() {
           required
         />
       </label>
-      <button type="submit">Ajouter</button>
+      <div className="button-add-article">
+        <button type="submit">Ajouter</button>
+      </div>
     </form>
   );
 }
