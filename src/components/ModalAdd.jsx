@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import AddArticleForm from "./AddArticle";
-
+import AddArticleForm from "./AddArticleForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function ModalAjout() {
+function ModalAjout({ articles, setArticles }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -20,7 +19,7 @@ function ModalAjout() {
   return (
     <div>
       <Button className="btn custom-btn" onClick={handleShow}>
-        Ajouter un article!
+        Add article
       </Button>
       {/* Arrière-plan de la page */}
       <Modal
@@ -39,7 +38,7 @@ function ModalAjout() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddArticleForm />
+          <AddArticleForm articles={articles} setArticles={setArticles} />
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
