@@ -120,8 +120,10 @@ label textarea {
   width: 270px;
   font-family: Roboto Mono;
 }
-.button-add-image {
-  width: 70%;
+.button-add-image button {
+  border-radius: 25px !important;
+  width: 70% !important;
+  height: 50px !important;
 }
 .button-add-article {
   width: 35%;
@@ -226,8 +228,8 @@ button {
   flex-direction: column;
   align-items: center;
   margin: 10%;
-  border-right: 1px solid solid #f0f0f0;
-  border-left: 1px solid solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
   gap: 20px;
   padding-top: 110px;
 }
@@ -242,6 +244,13 @@ button {
   height: 350px;
   border: 1px solid #f0f0f0;
   border-radius: 2px;
+
+  transition: all 0.5s ease 0s !important;
+}
+.article:hover {
+  width: 70%;
+  height: 360px;
+  box-shadow: -1px 0px 13px #f0f0f0;
 }
 .img-container {
   width: 35%;
@@ -309,4 +318,31 @@ button {
   width: 100%;
   word-wrap: break-word;
   box-sizing: border-box;
+}
+
+.category-tags {
+  display: flex;
+  width: 70%;
+  gap: 5px;
+}
+.category-tag {
+  width: 100%;
+}
+.article-date {
+  width: 30%;
+}
+.button-add-category {
+  width: 45% !important;
+  border-radius: 10px !important;
+}
+/* Home */
+
+.Typewriter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  width: 50%;
+  font-size: 1.4em;
+  color: white;
 }

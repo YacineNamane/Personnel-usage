@@ -26,8 +26,14 @@ function ArticleList({ articles }) {
               </div>
             </div>
             <div className="tag-data">
-              <div className="category-tag">{article.category} </div>
-              <div>
+              <div className="category-tags">
+                {article.categories.map((category, index) => (
+                  <div key={index} className="category-tag">
+                    {category}
+                  </div>
+                ))}
+              </div>
+              <div className="article-date">
                 <p>{article.date}</p>
               </div>
             </div>

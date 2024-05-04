@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function AddArticleForm({ articles, setArticles }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState(["Bien-être"]);
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
 
@@ -24,7 +24,7 @@ function AddArticleForm({ articles, setArticles }) {
     const newArticle = {
       title: title,
       description: description,
-      category: category,
+      categories: categories,
       image: image,
       date: date,
     };
@@ -32,9 +32,19 @@ function AddArticleForm({ articles, setArticles }) {
     // Réinitialiser les champs du formulaire après soumission
     setTitle("");
     setDescription("");
-    setCategory("");
+    setCategories([]);
     setImage("");
     setDate("");
+  };
+
+  const handleAddCategory = () => {
+    setCategories([...categories, ""]);
+  };
+
+  const handleChangeCategory = (index, value) => {
+    const updatedCategories = [...categories];
+    updatedCategories[index] = value;
+    setCategories(updatedCategories);
   };
 
   return (
@@ -57,17 +67,29 @@ function AddArticleForm({ articles, setArticles }) {
             required
           />
         </label>
-        <label>
-          Catégorie : {/* Ajout du champ de sélection de la catégorie */}
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="Bien-être">Bien-être</option>
-            <option value="Nutrition">Nutrition</option>
-            <option value="Anxiété">Anxiété</option>
-          </select>
-        </label>
+        {categories.map((category, index) => (
+          <div key={index}>
+            <label>
+              Catégorie :
+              <select
+                value={category}
+                onChange={(e) => handleChangeCategory(index, e.target.value)}
+              >
+                <option value="Bien-être">Bien-être</option>
+                <option value="Nutrition">Nutrition</option>
+                <option value="Anxiété">Anxiété</option>
+                {/* Ajoutez d'autres options de catégorie si nécessaire */}
+              </select>
+            </label>
+          </div>
+        ))}
+        <button
+          className="button-add-category"
+          type="button"
+          onClick={handleAddCategory}
+        >
+          Ajouter une catégorie
+        </button>
         <label>
           {/* Bouton personnalisé pour choisir un fichier */}
           <div className="button-add-image">
