@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import AnnaG from "../assets/images/annag.gif";
 
 const LoginForm = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,9 +16,15 @@ const LoginForm = ({ onSubmit }) => {
       return;
     }
     try {
-      const response = await axios.post("/login", { email, password }); // Envoyer la requête POST au backend
-      console.log(response.data); // Afficher la réponse du backend (le jeton JWT)
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login",
+        { email, password }
+      ); // Envoyer la requête POST au backend
+      const token = response.data.token; // Afficher la réponse du backend (le jeton JWT)
       // Stocker le jeton JWT dans le stockage local ou les cookies
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      navigate("/blog");
     } catch (error) {
       setError("Identifiants invalides");
       console.error("Erreur lors de la connexion :", error);

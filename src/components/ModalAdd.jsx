@@ -1,10 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { jwtDecode } from "jwt-decode";
 import AddArticleForm from "./AddArticleForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ModalAjout({ articles, setArticles }) {
   const [show, setShow] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // État de l'administrateur
+
+  useEffect(() => {
+    // Fonction pour vérifier si le token est valide
+    const isTokenValid = (token) => {
+      if (!token) return false;
+      const decodedToken = jwtDecode(token);
+      const currentTime = Date.now() / 1000; // Temps actuel en secondes
+      return decodedToken.exp > currentTime; // Comparaison avec la date d'expiration
+    };
+
+    const checkTokenValidity = () => {
+      const token = localStorage.getItem("token");
+      if (token && isTokenValid(token)) {
+        const decodedToken = jwtDecode(token);
+        setIsAdmin(decodedToken && decodedToken.isAdmin);
+      } else {
+        setIsAdmin(false);
+      }
+    };
+
+    // Vérifiez la validité du token lors du montage du composant
+    checkTokenValidity();
+
+    // Rafraîchissez périodiquement la vérification de la validité du token
+    const tokenCheckInterval = setInterval(checkTokenValidity, 1000);
+
+    // Nettoyage de l'intervalle lors du démontage du composant
+    return () => clearInterval(tokenCheckInterval);
+  }, []);
 
   const handleClose = () => {
     setShow(false);
@@ -18,9 +49,11 @@ function ModalAjout({ articles, setArticles }) {
 
   return (
     <div>
-      <Button className="btn custom-btn" onClick={handleShow}>
-        Add article
-      </Button>
+      {isAdmin && ( // Afficher le bouton uniquement si l'utilisateur est un administrateur
+        <Button className="btn custom-btn" onClick={handleShow}>
+          Add article
+        </Button>
+      )}
       {/* Arrière-plan de la page */}
       <Modal
         dialogClassName="custom-modal modal-lg"
