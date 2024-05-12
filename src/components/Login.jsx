@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AnnaG from "../assets/images/annag.gif";
+import LoginPic from "../assets/images/Naturypathy2.jpg";
 
 const LoginForm = ({ onSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,8 +21,8 @@ const LoginForm = ({ onSubmit }) => {
         "http://localhost:4000/api/auth/login",
         { email, password }
       ); // Envoyer la requête POST au backend
-      const token = response.data.token; // Afficher la réponse du backend (le jeton JWT)
-      // Stocker le jeton JWT dans le stockage local ou les cookies
+      const token = response.data.token;
+      // Stocker le jeton JWT dans le stockage local
       localStorage.setItem("token", token);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       navigate("/blog");
@@ -31,16 +32,28 @@ const LoginForm = ({ onSubmit }) => {
     }
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldAnimate(true);
+    }, 100);
+  }, []);
+
   return (
-    <div className="login-container">
-      <div className="login-section">
-        <img src={AnnaG} alt="GIF" className="gif-annag" />
+    <div className={`login-containner ${shouldAnimate ? "animate" : ""}`}>
+      <div
+        className={`login-img ${shouldAnimate ? "pop-in-left" : ""}`}
+        style={{ backgroundImage: `url(${LoginPic})` }}
+      >
+        {" "}
       </div>
-      <form onSubmit={handleSubmit}>
-        <h2>Admin</h2>
+      <form
+        className={`login-form ${shouldAnimate ? "pop-in-right" : ""}`}
+        onSubmit={handleSubmit}
+      >
+        <h2>Se connecter </h2>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="form-info-section">
-          <label htmlFor="email">Adresse email :</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
@@ -49,7 +62,7 @@ const LoginForm = ({ onSubmit }) => {
           />
         </div>
         <div className="form-info-section">
-          <label htmlFor="password">Mot de passe :</label>
+          <label htmlFor="password">Passeword:</label>
           <input
             type="password"
             id="password"

@@ -1,27 +1,48 @@
 body {
-  background-color: #1a1a1a !important;
+  background-color: darkseagreen !important;
 }
 .App {
   text-align: center;
   font-family: Roboto Mono;
-  color: rgb(67 64 64);
 }
 .Banner {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 75px;
+  align-items: center;
+  width: 100%;
+  height: 80px;
+}
+.nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 80%;
 }
 .Banner nav {
   display: flex;
   align-items: center;
-  width: 65%;
-  gap: 8%;
-  font-size: 1.4em;
+  width: 70%;
+  height: 50px;
+  padding: 2%;
+  justify-content: space-between;
+  font-size: 1.2em;
+  border: 1px solid white !important;
+  border-radius: 30px;
 }
 .Banner nav a {
+  width: 100%;
   text-decoration: none;
   color: white;
   position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.9em;
+}
+.nav-section {
+  display: flex;
+  white-space: nowrap;
 }
 
 .Banner nav a::after {
@@ -41,37 +62,93 @@ body {
   width: 100%;
 }
 
+.sign-out-btncontainer {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+  padding-right: 5%;
+  height: 45px;
+  white-space: nowrap;
+}
+.sign-out-btncontainer a {
+  border-radius: 30px;
+  height: 48px;
+  width: 100%;
+  border: 1px solid white !important;
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+.sign-out-btncontainer a:hover {
+  color: rgb(67 64 64);
+  background-color: white;
+}
+
+.sign-out-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  border-radius: 30px;
+  height: 45px;
+  background-color: darkseagreen;
+  border: 1px solid #f0f0f0 !important;
+
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+.sign-out-button:hover {
+  color: rgb(67 64 64);
+  background-color: white;
+}
+
 #LogoAP {
   display: flex;
 }
 .Logo {
   display: flex;
+  justify-content: center;
   height: 135px;
+  width: 15%;
 }
 
 form {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 50%;
-  height: 823px;
+  justify-content: center;
+  height: 825px;
+  background-color: white;
+  border-radius: 0px 25px 25px 0px;
   gap: 50px;
+  width: 45%;
 }
 form h2 {
-  font-size: 4.4em;
+  font-size: 3em;
+  color: rgb(67 64 64);
+  padding-bottom: 150px;
 }
-form input {
+form input,
+form label {
   font-family: Roboto Mono;
   color: rgb(67 64 64);
   font-size: 0.9em;
-  height: 30px;
-}
-form label {
+  display: flex;
   width: 200px;
+  height: 30px;
+  font-weight: bold;
 }
+
 .form-info-section {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8%;
 }
 form button {
@@ -81,11 +158,13 @@ form button {
   margin: 0;
   font-family: Roboto Mono;
   font-size: 1.4em;
-  border-radius: 2px;
-  width: 16%;
-  height: 58px;
+  border-radius: 25px;
+  width: 100%;
+  height: 47px;
+  padding: 8px;
   color: aliceblue;
-  background-color: rgb(67 64 64);
+  background-color: darkseagreen;
+  transition: background-color 0.5s ease, color 0.3s ease;
 }
 form button:hover {
   color: rgb(67 64 64);
@@ -94,16 +173,48 @@ form button:hover {
   cursor: pointer;
 }
 .form-button {
+  width: 200px;
   padding-top: 65px;
+}
+.login-containner {
+  display: flex;
+  padding-top: 50px;
+  padding-left: 5%;
+  padding-bottom: 100px;
   width: 100%;
 }
-
-.login-container {
-  display: flex;
-}
-.login-section {
-  display: flex;
+.login-img {
   width: 50%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 25px 0px 0px 25px;
+}
+
+/* Login page Pop effect */
+
+.login-img,
+.login-form {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateY(-50vh);
+}
+
+.pop-in-left {
+  transform: translateX(-50%);
+}
+
+.pop-in-right {
+  transform: translateX(50%);
+}
+
+.login-containner.animate .login-img {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.login-containner.animate .login-form {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Blog */
@@ -210,9 +321,10 @@ button {
   font-size: 1.4em;
   border-radius: 1px !important;
   border-color: rgb(67 64 64) !important;
-  height: 58px;
+  height: 45px;
   color: aliceblue !important;
-  background-color: rgb(67 64 64) !important;
+  background-color: #050a30 !important;
+  border-radius: 30px !important;
 }
 .custom-btn:hover {
   color: rgb(67 64 64) !important;
@@ -222,6 +334,9 @@ button {
 }
 
 /* Articles */
+.article-management {
+  padding-top: 100px;
+}
 
 .article-list {
   display: flex;
@@ -231,7 +346,6 @@ button {
   border-right: 1px solid #f0f0f0;
   border-left: 1px solid #f0f0f0;
   gap: 20px;
-  padding-top: 110px;
 }
 .article-list img {
   height: 300px;
@@ -271,7 +385,9 @@ button {
   background-color: white;
   color: rgb(67 64 64);
   border-radius: 2px;
-  width: 22%;
+  width: 30% !important;
+  font-size: 0.9em;
+  padding-bottom: 1px;
 }
 .category-tag:hover {
   background-color: rgb(67 64 64);
@@ -340,9 +456,99 @@ button {
 .Typewriter {
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 600px;
   width: 50%;
+}
+.Typewriter span {
+  color: rgb(67 64 64);
   font-size: 1.4em;
+}
+.background-home {
+  background-image: url("./assets/images/Naturotherapy.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
+}
+
+/* Footer */
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+}
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px;
+  height: 200px;
+  width: 85%;
+  border-bottom: 1px solid #f0f0f0;
+}
+#logof {
+  height: 200px;
+}
+.contact-footer a {
+  color: white;
+  text-decoration: none;
+  transition: 0.5s ease, color 0.3s ease;
+}
+.contact-footer a:hover {
+  color: rgb(67 64 64);
+}
+.ml-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 33%;
+  border-left: 1px solid #f0f0f0;
+}
+.ml-container a {
+  color: white;
+  text-decoration: none;
+  transition: 0.5s ease, color 0.3s ease;
+}
+.ml-container a:hover {
+  color: rgb(67 64 64);
+}
+.contact-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 33%;
+  border-left: 1px solid #f0f0f0;
+}
+.footer-personnel-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 33%;
+}
+.rights {
+  font-size: 0.8em;
+  color: rgb(67 64 64);
+}
+span {
+  color: white;
+}
+.span-f-info {
+  height: 50px;
+}
+.logo-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
 }

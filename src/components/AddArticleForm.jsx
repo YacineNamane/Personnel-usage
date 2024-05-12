@@ -78,7 +78,7 @@ function AddArticleForm({ articles, setArticles }) {
                 <option value="Bien-être">Bien-être</option>
                 <option value="Nutrition">Nutrition</option>
                 <option value="Anxiété">Anxiété</option>
-                {/* Ajoutez d'autres options de catégorie si nécessaire */}
+                {/* Ajout d'autres catégorie si nécessaire a voir....*/}
               </select>
             </label>
           </div>
@@ -91,13 +91,13 @@ function AddArticleForm({ articles, setArticles }) {
           Ajouter une catégorie
         </button>
         <label>
-          {/* Bouton personnalisé pour choisir un fichier */}
+          {/* Bouton pour choisir un fichier */}
           <div className="button-add-image">
             <button type="button" onClick={handleChooseFile}>
               + Image
             </button>
           </div>
-          {/* Champ de saisie caché pour le téléchargement de fichiers */}
+          {}
           <input
             id="fileInput"
             type="file"

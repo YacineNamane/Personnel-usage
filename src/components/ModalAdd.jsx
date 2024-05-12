@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function ModalAjout({ articles, setArticles }) {
   const [show, setShow] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // État de l'administrateur
+  const [isAdmin, setIsAdmin] = useState(false); // admin status
 
   useEffect(() => {
     // Fonction pour vérifier si le token est valide
@@ -14,7 +14,7 @@ function ModalAjout({ articles, setArticles }) {
       if (!token) return false;
       const decodedToken = jwtDecode(token);
       const currentTime = Date.now() / 1000; // Temps actuel en secondes
-      return decodedToken.exp > currentTime; // Comparaison avec la date d'expiration
+      return decodedToken.exp > currentTime; // Comparaison avec la date d'expiration du token
     };
 
     const checkTokenValidity = () => {
@@ -48,8 +48,8 @@ function ModalAjout({ articles, setArticles }) {
   };
 
   return (
-    <div>
-      {isAdmin && ( // Afficher le bouton uniquement si l'utilisateur est un administrateur
+    <div className="article-management">
+      {isAdmin && ( // Afficher le bouton uniquement si l'utilisateur est un admin
         <Button className="btn custom-btn" onClick={handleShow}>
           Add article
         </Button>
