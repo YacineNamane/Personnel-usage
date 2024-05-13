@@ -231,6 +231,9 @@ label textarea {
   width: 270px;
   font-family: Roboto Mono;
 }
+.button-add-image {
+  width: 100%;
+}
 .button-add-image button {
   border-radius: 25px !important;
   width: 70% !important;
@@ -340,52 +343,41 @@ button {
 
 .article-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10%;
-  border-right: 1px solid #f0f0f0;
-  border-left: 1px solid #f0f0f0;
-  gap: 20px;
-}
-.article-list img {
-  height: 300px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   width: 100%;
-  object-fit: cover;
+  height: 1200px;
+  padding: 50px;
 }
+.article-list a {
+  color: white;
+  text-decoration: none;
+}
+
 .article {
   display: flex;
-  width: 68%;
-  height: 350px;
-  border: 1px solid #f0f0f0;
-  border-radius: 2px;
-
+  width: 25%;
+  height: 550px;
   transition: all 0.5s ease 0s !important;
 }
 .article:hover {
-  width: 70%;
-  height: 360px;
+  width: 26%;
+  height: 560px;
   box-shadow: -1px 0px 13px #f0f0f0;
 }
+
 .img-container {
-  width: 35%;
+  height: 65%; /* Ajustez la hauteur selon vos besoins */
+  width: 100%; /* Ajustez la largeur selon vos besoins */
+  background-size: cover; /* Redimensionne l'image de fond pour qu'elle remplisse son conteneur */
+  background-position: center; /* Centre l'image de fond */
 }
-.img-container img {
-  height: 100%;
-}
-.article-main-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 65%;
-  background-color: rgb(67 64 64);
-  color: white;
-}
+
 .category-tag {
   background-color: white;
   color: rgb(67 64 64);
   border-radius: 2px;
-  width: 30% !important;
+  height: 5%;
   font-size: 0.9em;
   padding-bottom: 1px;
 }
@@ -395,58 +387,26 @@ button {
   border: 1px solid #f0f0f0;
   cursor: pointer;
 }
-.tag-data {
-  display: flex;
-  height: 25px;
-  justify-content: space-between;
-  width: 100%;
-  padding-left: 5%;
-  height: 25px;
-  padding-right: 5%;
-}
+
 .article-title {
   display: flex;
   box-sizing: border-box;
-  width: 40%;
+  height: 15%;
   padding: 5%;
-  border-right: 1px solid #f0f0f0;
 }
 .article-title h2 {
   width: 100%;
   word-wrap: break-word;
   box-sizing: border-box;
+  font-size: 1.4em;
 }
 .article-description {
   display: flex;
   align-items: center;
-  width: 60%;
+  height: 15%;
   padding: 5%;
-}
-.title-description {
-  display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
-  width: 100%;
-  height: 300px;
-  padding: 5%;
-}
-.article-description p {
-  width: 100%;
-  word-wrap: break-word;
-  box-sizing: border-box;
 }
 
-.category-tags {
-  display: flex;
-  width: 70%;
-  gap: 5px;
-}
-.category-tag {
-  width: 100%;
-}
-.article-date {
-  width: 30%;
-}
 .button-add-category {
   width: 45% !important;
   border-radius: 10px !important;

@@ -3,7 +3,10 @@ import React, { useState } from "react";
 function AddArticleForm({ articles, setArticles }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState(["Bien-être"]);
+  const [categories, setCategories] = useState([
+    "Bien dans ma tête",
+    "Bien dans mon corps",
+  ]);
   const [image, setImage] = useState("");
   const [date, setDate] = useState("");
 
@@ -37,10 +40,6 @@ function AddArticleForm({ articles, setArticles }) {
     setDate("");
   };
 
-  const handleAddCategory = () => {
-    setCategories([...categories, ""]);
-  };
-
   const handleChangeCategory = (index, value) => {
     const updatedCategories = [...categories];
     updatedCategories[index] = value;
@@ -67,29 +66,20 @@ function AddArticleForm({ articles, setArticles }) {
             required
           />
         </label>
-        {categories.map((category, index) => (
-          <div key={index}>
-            <label>
-              Catégorie :
-              <select
-                value={category}
-                onChange={(e) => handleChangeCategory(index, e.target.value)}
-              >
-                <option value="Bien-être">Bien-être</option>
-                <option value="Nutrition">Nutrition</option>
-                <option value="Anxiété">Anxiété</option>
-                {/* Ajout d'autres catégorie si nécessaire a voir....*/}
-              </select>
-            </label>
-          </div>
-        ))}
-        <button
-          className="button-add-category"
-          type="button"
-          onClick={handleAddCategory}
-        >
-          Ajouter une catégorie
-        </button>
+        <label>
+          Catégorie :
+          <select
+            value={categories[0]} // Utilisez la première catégorie de la liste
+            onChange={(e) => handleChangeCategory(0, e.target.value)} // Utilisez la fonction pour changer la première catégorie
+          >
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </label>
+
         <label>
           {/* Bouton pour choisir un fichier */}
           <div className="button-add-image">
