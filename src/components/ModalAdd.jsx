@@ -1,41 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { jwtDecode } from "jwt-decode";
 import AddArticleForm from "./AddArticleForm";
+import ArticleList from "./ArticleList";
+import AdminAuth from "./AdminAuth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ModalAjout({ articles, setArticles }) {
   const [show, setShow] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // admin status
-
-  useEffect(() => {
-    // Fonction pour vérifier si le token est valide
-    const isTokenValid = (token) => {
-      if (!token) return false;
-      const decodedToken = jwtDecode(token);
-      const currentTime = Date.now() / 1000; // Temps actuel en secondes
-      return decodedToken.exp > currentTime; // Comparaison avec la date d'expiration du token
-    };
-
-    const checkTokenValidity = () => {
-      const token = localStorage.getItem("token");
-      if (token && isTokenValid(token)) {
-        const decodedToken = jwtDecode(token);
-        setIsAdmin(decodedToken && decodedToken.isAdmin);
-      } else {
-        setIsAdmin(false);
-      }
-    };
-
-    // Vérifiez la validité du token lors du montage du composant
-    checkTokenValidity();
-
-    // Rafraîchissez périodiquement la vérification de la validité du token
-    const tokenCheckInterval = setInterval(checkTokenValidity, 1000);
-
-    // Nettoyage de l'intervalle lors du démontage du composant
-    return () => clearInterval(tokenCheckInterval);
-  }, []);
+  const [editMode, setEditMode] = useState(false);
+  const isAdmin = AdminAuth();
 
   const handleClose = () => {
     setShow(false);
@@ -47,13 +20,30 @@ function ModalAjout({ articles, setArticles }) {
     document.body.classList.add("modal-opened");
   };
 
+  const handleToggleEditMode = () => {
+    setEditMode(!editMode);
+  };
+
   return (
     <div className="article-management">
-      {isAdmin && ( // Afficher le bouton uniquement si l'utilisateur est un admin
-        <Button className="btn custom-btn" onClick={handleShow}>
-          Add article
-        </Button>
-      )}
+      <div className="admin-pannel">
+        {isAdmin && (
+          <>
+            {/* Bouton Add Article */}
+            <Button className="btn custom-btn" onClick={handleShow}>
+              Add article
+            </Button>
+            {/* Bouton Edit Mode */}
+            <Button
+              className="btn custom-btn"
+              onClick={handleToggleEditMode}
+              style={{ marginRight: "10px" }}
+            >
+              {editMode ? "Exit Edit Mode" : "Edit Mode"}
+            </Button>
+          </>
+        )}
+      </div>
       {/* Arrière-plan de la page */}
       <Modal
         dialogClassName="custom-modal modal-lg"
@@ -75,6 +65,7 @@ function ModalAjout({ articles, setArticles }) {
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
+      <ArticleList articles={articles} isAdmin={isAdmin} editMode={editMode} />
     </div>
   );
 }

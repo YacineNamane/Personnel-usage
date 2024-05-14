@@ -50,7 +50,7 @@ function AddArticleForm({ articles, setArticles }) {
     <div className="article-container">
       <form className="form-ajout" onSubmit={handleSubmit}>
         <label>
-          Titre:
+          Titre :
           <input
             type="text"
             value={title}
@@ -59,7 +59,7 @@ function AddArticleForm({ articles, setArticles }) {
           />
         </label>
         <label>
-          Description:
+          Description :
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -105,7 +105,7 @@ function AddArticleForm({ articles, setArticles }) {
           />
         )}
         <label>
-          Date de publication:
+          Date de publication :
           <input
             type="date"
             value={date}
