@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import trash from "../assets/images/trash.png";
 import update from "../assets/images/update.png";
 
-function ArticleList({ articles, isAdmin, editMode }) {
+function ArticleList({ isAdmin, editMode }) {
+  const [articles, setArticles] = useState([]); // État pour stocker les articles récupérés
+
+  useEffect(() => {
+    // Fonction pour récupérer les articles depuis l'API
+    const fetchArticles = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/articles"); // Endpoint de l'API à appeler
+        setArticles(response.data.articles); // Mettre à jour l'état avec les articles récupérés depuis l'API
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+
+    fetchArticles(); // Appeler la fonction pour récupérer les articles au chargement du composant
+  }, []);
+
   const renderAdminButtons = () => {
     if (!isAdmin || !editMode) return null;
 
@@ -21,8 +38,8 @@ function ArticleList({ articles, isAdmin, editMode }) {
 
   return (
     <div className="article-list">
-      {articles.map((article, index) => (
-        <div key={index} className="article">
+      {articles.map((article) => (
+        <div key={article._id} className="article">
           <NavLink to={`/ArticleDetails/${article._id}`}>
             <div
               className="img-container"
@@ -33,13 +50,15 @@ function ArticleList({ articles, isAdmin, editMode }) {
 
             <div className="article-title">
               <h2>
-                {article.title.length > 20
-                  ? article.title.slice(0, 20) + "..."
-                  : article.title}
+                {article.title
+                  ? article.title.length > 20
+                    ? article.title.slice(0, 20) + "..."
+                    : article.title
+                  : "title missing"}
               </h2>
             </div>
 
-            {article.categories.length > 0 && (
+            {article.categories && article.categories.length > 0 && (
               <div className="category-tag">
                 {article.categories[0]}{" "}
                 {/* Affiche uniquement la première catégorie */}
@@ -48,9 +67,11 @@ function ArticleList({ articles, isAdmin, editMode }) {
 
             <div className="article-description">
               <p>
-                {article.description.length > 50
-                  ? article.description.slice(0, 50) + "..."
-                  : article.description}
+                {article.description
+                  ? article.description.length > 50
+                    ? article.description.slice(0, 50) + "..."
+                    : article.description
+                  : "Description Missing"}
               </p>
             </div>
           </NavLink>

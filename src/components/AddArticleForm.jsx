@@ -1,49 +1,57 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function AddArticleForm({ articles, setArticles }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState([
-    "Bien dans ma tête",
-    "Bien dans mon corps",
-  ]);
-  const [image, setImage] = useState("");
+  const [categories, setCategories] = useState("Bien dans ma tête");
+  const [image, setImage] = useState("null");
   const [date, setDate] = useState("");
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setImage(event.target.result);
-    };
-    reader.readAsDataURL(file);
+    setImage(e.target.files[0]);
   };
+
   const handleChooseFile = () => {
     document.getElementById("fileInput").click();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newArticle = {
-      title: title,
-      description: description,
-      categories: categories,
-      image: image,
-      date: date,
-    };
-    setArticles([...articles, newArticle]);
-    // Réinitialiser les champs du formulaire après soumission
-    setTitle("");
-    setDescription("");
-    setCategories([]);
-    setImage("");
-    setDate("");
-  };
 
-  const handleChangeCategory = (index, value) => {
-    const updatedCategories = [...categories];
-    updatedCategories[index] = value;
-    setCategories(updatedCategories);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("categories", JSON.stringify([categories])); // Assuming single category selection
+    formData.append("image", image);
+    formData.append("date", date);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/articles/add",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        const data = response.data;
+        setArticles([...articles, data.article]);
+        setTitle("");
+        setDescription("");
+        setCategories("Bien dans ma tête");
+        setImage(null);
+        setDate("");
+        console.log(data);
+      } else {
+        console.error("Failed to add article");
+      }
+    } catch (error) {
+      console.error("Error adding article:", error);
+    }
   };
 
   return (
@@ -69,14 +77,11 @@ function AddArticleForm({ articles, setArticles }) {
         <label>
           Catégorie :
           <select
-            value={categories[0]} // Utilisez la première catégorie de la liste
-            onChange={(e) => handleChangeCategory(0, e.target.value)} // Utilisez la fonction pour changer la première catégorie
+            value={categories} // Utilisez la première catégorie de la liste
+            onChange={(e) => setCategories(e.target.value)} // Utilisez la fonction pour changer la première catégorie
           >
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
+            <option value="Bien dans ma tête">Bien dans ma tête</option>
+            <option value="Bien dans mon corps">Bien dans mon corps</option>
           </select>
         </label>
 
@@ -97,9 +102,9 @@ function AddArticleForm({ articles, setArticles }) {
             required
           />
         </label>
-        {image && (
+        {image && image instanceof File && (
           <img
-            src={image}
+            src={URL.createObjectURL(image)}
             alt="that's how it looks for now"
             style={{ maxWidth: "200px" }}
           />
