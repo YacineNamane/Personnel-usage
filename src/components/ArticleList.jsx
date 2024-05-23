@@ -8,7 +8,6 @@ function ArticleList({ isAdmin, editMode }) {
   const [articles, setArticles] = useState([]); // État pour stocker les articles récupérés
 
   useEffect(() => {
-    // Fonction pour récupérer les articles depuis l'API
     const fetchArticles = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/articles"); // Endpoint de l'API à appeler
@@ -21,7 +20,20 @@ function ArticleList({ isAdmin, editMode }) {
     fetchArticles(); // Appeler la fonction pour récupérer les articles au chargement du composant
   }, []);
 
-  const renderAdminButtons = () => {
+  // Delete
+
+  const deleteArticle = async (articleId) => {
+    try {
+      await axios.delete(
+        `http://localhost:4000/api/articles/delete/${articleId}`
+      );
+      setArticles(articles.filter((article) => article._id !== articleId)); // Mettre à jour l'état pour supprimer l'article localement
+    } catch (error) {
+      console.error("Error deleting article:", error);
+    }
+  };
+
+  const renderAdminButtons = (articleId) => {
     if (!isAdmin || !editMode) return null;
 
     return (
@@ -29,7 +41,7 @@ function ArticleList({ isAdmin, editMode }) {
         <div className="update-one">
           <img src={update} alt="update-icone" />
         </div>
-        <div className="delete-one">
+        <div className="delete-one" onClick={() => deleteArticle(articleId)}>
           <img src={trash} alt="trash-bin" />
         </div>
       </div>
@@ -75,7 +87,7 @@ function ArticleList({ isAdmin, editMode }) {
               </p>
             </div>
           </NavLink>
-          {renderAdminButtons()}
+          {renderAdminButtons(article._id)}
         </div>
       ))}
     </div>
