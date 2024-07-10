@@ -28,7 +28,6 @@ body {
   padding: 2%;
   justify-content: space-between;
   font-size: 1.2em;
-  border: 1px solid white !important;
 }
 .Banner nav a {
   width: 100%;
@@ -73,7 +72,7 @@ body {
   border-radius: 30px;
   height: 48px;
   width: 100%;
-  border: 1px solid white !important;
+
   color: white;
   display: inline-block;
   vertical-align: middle;
@@ -97,7 +96,6 @@ body {
 
   height: 45px;
   background-color: darkseagreen;
-  border: 1px solid #f0f0f0 !important;
 
   transition: background-color 0.5s ease, color 0.3s ease;
 }
@@ -408,16 +406,18 @@ button {
   transition: all 0.5s ease 0s !important;
 }
 .article:hover {
-  width: 30%;
-  height: 560px;
   box-shadow: -1px 0px 13px #f0f0f0;
 }
 
 .img-container {
-  height: 65%; /* Ajustez la hauteur selon vos besoins */
-  width: 100%; /* Ajustez la largeur selon vos besoins */
-  background-size: cover; /* Redimensionne l'image de fond pour qu'elle remplisse son conteneur */
-  background-position: center; /* Centre l'image de fond */
+  height: 65%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: all 0.3s ease 0s !important;
+}
+.img-container:hover {
+  padding: 2px;
 }
 
 .category-tag {

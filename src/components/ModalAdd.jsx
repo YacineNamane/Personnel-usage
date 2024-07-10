@@ -8,20 +8,30 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function ModalAjout({ articles, setArticles }) {
   const [show, setShow] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [articleToEdit, setArticleToEdit] = useState(null);
+
   const isAdmin = AdminAuth();
 
   const handleClose = () => {
     setShow(false);
+    setArticleToEdit(null);
     document.body.classList.remove("modal-opened");
   };
 
   const handleShow = () => {
     setShow(true);
     document.body.classList.add("modal-opened");
+    setEditMode(false);
   };
 
   const handleToggleEditMode = () => {
     setEditMode(!editMode);
+  };
+
+  const handleEditArticle = (article) => {
+    setArticleToEdit(article);
+    setShow(true);
+    document.body.classList.add("modal-opened");
   };
 
   return (
@@ -29,11 +39,9 @@ function ModalAjout({ articles, setArticles }) {
       <div className="admin-pannel">
         {isAdmin && (
           <>
-            {/* Bouton Add Article */}
             <Button className="btn custom-btn" onClick={handleShow}>
               Add article
             </Button>
-            {/* Bouton Edit Mode */}
             <Button
               className="btn custom-btn"
               onClick={handleToggleEditMode}
@@ -44,7 +52,6 @@ function ModalAjout({ articles, setArticles }) {
           </>
         )}
       </div>
-      {/* Arrière-plan de la page */}
       <Modal
         dialogClassName="custom-modal modal-lg"
         show={show}
@@ -56,16 +63,27 @@ function ModalAjout({ articles, setArticles }) {
       >
         <Modal.Header closeButton={false}>
           <Modal.Title>
-            <div>Partager un article</div>
+            <div>
+              {articleToEdit ? "Modifier l'article" : "Partager un article"}
+            </div>
             <div className="btn-close" onClick={handleClose}></div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddArticleForm articles={articles} setArticles={setArticles} />
+          <AddArticleForm
+            articles={articles}
+            setArticles={setArticles}
+            articleToEdit={articleToEdit}
+          />
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
-      <ArticleList articles={articles} isAdmin={isAdmin} editMode={editMode} />
+      <ArticleList
+        articles={articles}
+        isAdmin={isAdmin}
+        editMode={editMode}
+        onEditArticle={handleEditArticle}
+      />
     </div>
   );
 }

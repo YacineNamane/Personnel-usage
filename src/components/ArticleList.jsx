@@ -4,14 +4,14 @@ import axios from "axios";
 import trash from "../assets/images/trash.png";
 import update from "../assets/images/update.png";
 
-function ArticleList({ isAdmin, editMode }) {
-  const [articles, setArticles] = useState([]); // État pour stocker les articles récupérés
+function ArticleList({ articles, isAdmin, editMode, onEditArticle }) {
+  const [articleList, setArticleList] = useState([]); // État pour stocker les articles récupérés
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/articles"); // Endpoint de l'API à appeler
-        setArticles(response.data.articles); // Mettre à jour l'état avec les articles récupérés depuis l'API
+        setArticleList(response.data.articles); // Mettre à jour l'état avec les articles récupérés depuis l'API
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
@@ -20,28 +20,28 @@ function ArticleList({ isAdmin, editMode }) {
     fetchArticles(); // Appeler la fonction pour récupérer les articles au chargement du composant
   }, []);
 
-  // Delete
-
   const deleteArticle = async (articleId) => {
     try {
       await axios.delete(
         `http://localhost:4000/api/articles/delete/${articleId}`
       );
-      setArticles(articles.filter((article) => article._id !== articleId)); // Mettre à jour l'état pour supprimer l'article localement
+      setArticleList(
+        articleList.filter((article) => article._id !== articleId)
+      ); // Mettre à jour l'état pour supprimer l'article localement
     } catch (error) {
       console.error("Error deleting article:", error);
     }
   };
 
-  const renderAdminButtons = (articleId) => {
+  const renderAdminButtons = (article) => {
     if (!isAdmin || !editMode) return null;
 
     return (
       <div className="admin-buttons">
-        <div className="update-one">
+        <div className="update-one" onClick={() => onEditArticle(article)}>
           <img src={update} alt="update-icone" />
         </div>
-        <div className="delete-one" onClick={() => deleteArticle(articleId)}>
+        <div className="delete-one" onClick={() => deleteArticle(article._id)}>
           <img src={trash} alt="trash-bin" />
         </div>
       </div>
@@ -50,7 +50,7 @@ function ArticleList({ isAdmin, editMode }) {
 
   return (
     <div className="article-list">
-      {articles.map((article) => (
+      {articleList.map((article) => (
         <div key={article._id} className="article">
           <NavLink to={`/ArticleDetails/${article._id}`}>
             <div
@@ -87,7 +87,7 @@ function ArticleList({ isAdmin, editMode }) {
               </p>
             </div>
           </NavLink>
-          {renderAdminButtons(article._id)}
+          {renderAdminButtons(article)}
         </div>
       ))}
     </div>

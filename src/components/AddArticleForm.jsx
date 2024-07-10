@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function AddArticleForm({ articles, setArticles }) {
+function AddArticleForm({ articles, setArticles, articleToEdit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [categories, setCategories] = useState("Bien dans ma tête");
-  const [image, setImage] = useState("null");
+  const [image, setImage] = useState(null);
   const [date, setDate] = useState("");
+
+  useEffect(() => {
+    if (articleToEdit) {
+      setTitle(articleToEdit.title || "");
+      setDescription(articleToEdit.description || "");
+      setCategories(articleToEdit.categories || "Bien dans ma tête");
+      setImage(articleToEdit.image || null);
+      setDate(articleToEdit.date || "");
+    }
+  }, [articleToEdit]);
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -22,24 +32,45 @@ function AddArticleForm({ articles, setArticles }) {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("categories", JSON.stringify([categories])); // Assuming single category selection
+    formData.append("categories", categories);
     formData.append("image", image);
     formData.append("date", date);
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/articles/add",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      let response;
+      if (articleToEdit) {
+        response = await axios.put(
+          `http://localhost:4000/api/articles/update/${articleToEdit._id}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      } else {
+        response = await axios.post(
+          "http://localhost:4000/api/articles/add",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+      }
 
-      if (response.status === 201) {
+      if (response.status === 200 || response.status === 201) {
         const data = response.data;
-        setArticles([...articles, data.article]);
+        if (articleToEdit) {
+          setArticles(
+            articles.map((article) =>
+              article._id === data.article._id ? data.article : article
+            )
+          );
+        } else {
+          setArticles([...articles, data.article]);
+        }
         setTitle("");
         setDescription("");
         setCategories("Bien dans ma tête");
@@ -47,10 +78,10 @@ function AddArticleForm({ articles, setArticles }) {
         setDate("");
         console.log(data);
       } else {
-        console.error("Failed to add article");
+        console.error("Failed to save article");
       }
     } catch (error) {
-      console.error("Error adding article:", error);
+      console.error("Error saving article:", error);
     }
   };
 
@@ -77,8 +108,8 @@ function AddArticleForm({ articles, setArticles }) {
         <label>
           Catégorie :
           <select
-            value={categories} // Utilisez la première catégorie de la liste
-            onChange={(e) => setCategories(e.target.value)} // Utilisez la fonction pour changer la première catégorie
+            value={categories}
+            onChange={(e) => setCategories(e.target.value)}
           >
             <option value="Bien dans ma tête">Bien dans ma tête</option>
             <option value="Bien dans mon corps">Bien dans mon corps</option>
@@ -86,26 +117,31 @@ function AddArticleForm({ articles, setArticles }) {
         </label>
 
         <label>
-          {/* Bouton pour choisir un fichier */}
           <div className="button-add-image">
             <button type="button" onClick={handleChooseFile}>
               + Image
             </button>
           </div>
-          {}
           <input
             id="fileInput"
             type="file"
             onChange={handleImageChange}
             accept="image/*"
             style={{ display: "none" }}
-            required
+            required={!image}
           />
         </label>
         {image && image instanceof File && (
           <img
             src={URL.createObjectURL(image)}
             alt="that's how it looks for now"
+            style={{ maxWidth: "200px" }}
+          />
+        )}
+        {image && typeof image === "string" && (
+          <img
+            src={image}
+            alt="current article"
             style={{ maxWidth: "200px" }}
           />
         )}
@@ -119,7 +155,7 @@ function AddArticleForm({ articles, setArticles }) {
           />
         </label>
         <div className="button-add-article">
-          <button type="submit">Ajouter</button>
+          <button type="submit">{articleToEdit ? "Update" : "Share"}</button>
         </div>
       </form>
     </div>
