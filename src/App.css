@@ -8,9 +8,10 @@ body {
 .Banner {
   display: flex;
   justify-content: space-between;
+  background-color: white;
   align-items: center;
   width: 100%;
-  height: 80px;
+  height: 105px;
 }
 .nav-main {
   display: flex;
@@ -26,13 +27,13 @@ body {
   width: 70%;
   height: 50px;
   padding: 2%;
-  justify-content: space-between;
+  gap: 15%;
   font-size: 1.2em;
 }
 .Banner nav a {
   width: 100%;
   text-decoration: none;
-  color: white;
+  color: rgb(67 64 64);
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -51,13 +52,16 @@ body {
   width: 0;
   height: 3px;
   color: black;
-  background-color: white;
+  background-color: darkseagreen;
   transition: width 0.5s ease;
 }
 
 .Banner nav a:hover::after {
-  color: black;
+  color: darkseagreen;
   width: 100%;
+}
+.Banner nav a:hover {
+  color: darkseagreen;
 }
 
 .sign-out-btncontainer {
@@ -72,7 +76,6 @@ body {
   border-radius: 30px;
   height: 48px;
   width: 100%;
-
   color: white;
   display: inline-block;
   vertical-align: middle;
@@ -93,10 +96,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 5%;
-
   height: 45px;
-  background-color: darkseagreen;
-
+  background-color: white;
   transition: background-color 0.5s ease, color 0.3s ease;
 }
 
@@ -104,15 +105,19 @@ body {
   color: rgb(67 64 64);
   background-color: white;
 }
+#Login {
+  height: 30px;
+  width: 30px;
+}
 
 #LogoAP {
   display: flex;
+  width: 75%;
 }
 .Logo {
   display: flex;
   justify-content: center;
-  height: 135px;
-  width: 15%;
+  width: 25%;
 }
 
 form {
@@ -366,7 +371,6 @@ button {
 
 /* Articles */
 .article-management {
-  padding-top: 100px;
 }
 
 .admin-pannel {
@@ -375,7 +379,7 @@ button {
   justify-content: center;
   gap: 2%;
   padding: 30px;
-  border-top: 10px solid papayawhip;
+  background-color: papayawhip;
 }
 .admin-pannel button {
   border-radius: 0px !important;
@@ -407,6 +411,7 @@ button {
 }
 .article:hover {
   box-shadow: -1px 0px 13px #f0f0f0;
+  background-color: white;
 }
 
 .img-container {
@@ -436,12 +441,14 @@ button {
 }
 
 .article-title {
+  color: rgb(67 64 64);
   display: flex;
   box-sizing: border-box;
   height: 15%;
   padding: 5%;
 }
 .article-title h2 {
+  color: rgb(67 64 64);
   width: 100%;
   word-wrap: break-word;
   box-sizing: border-box;
@@ -456,6 +463,7 @@ button {
   position: relative;
 }
 .article-description p {
+  color: rgb(67 64 64);
   word-wrap: break-word;
   box-sizing: border-box;
   width: 100%;
@@ -585,4 +593,35 @@ span {
   justify-content: center;
   align-items: center;
   height: 70px;
+}
+
+/* Article details :id page  */
+.article-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: papayawhip;
+  padding: 50px;
+  height: 1700px;
+}
+.article-info-detail {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 35px;
+  padding: 10%;
+}
+.article-info-detail h2,
+p {
+  color: rgb(67 64 64);
+}
+.article-image-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 65%;
+  width: 45%;
+  background-size: cover;
+  background-position: center;
 }

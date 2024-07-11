@@ -14,7 +14,12 @@ function AddArticleForm({ articles, setArticles, articleToEdit }) {
       setDescription(articleToEdit.description || "");
       setCategories(articleToEdit.categories || "Bien dans ma tête");
       setImage(articleToEdit.image || null);
-      setDate(articleToEdit.date || "");
+
+      // Convertir la date en format yyyy-MM-dd si nécessaire
+      const formattedDate = articleToEdit.date
+        ? new Date(articleToEdit.date).toISOString().split("T")[0]
+        : "";
+      setDate(formattedDate);
     }
   }, [articleToEdit]);
 

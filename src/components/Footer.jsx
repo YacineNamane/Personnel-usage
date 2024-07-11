@@ -13,7 +13,9 @@ function Footer() {
             <img src={Logo} alt="LogoAnna" id="logof" />
           </div>
           <div className="span-f-info">
-            <span>Docteur en pharmacie , Naturopathe</span>
+            <span>
+              Docteur en pharmacie <br /> Naturopathe
+            </span>
           </div>
         </div>
         <div className="ml-container">

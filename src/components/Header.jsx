@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/LogoAP.png";
+import user from "../assets/images/user.png";
 
 function NavPannel() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,10 +43,12 @@ function NavPannel() {
       <div className="sign-out-btncontainer">
         {isLoggedIn ? (
           <button className="sign-out-button" onClick={handleLogout}>
-            Sign Out
+            <img src={user} alt="LogoAnna" id="Login" />
           </button>
         ) : (
-          <NavLink to="/signin">Sign In</NavLink>
+          <NavLink to="/signin">
+            <img src={user} alt="LogoAnna" id="Login" />
+          </NavLink>
         )}
       </div>
     </div>
