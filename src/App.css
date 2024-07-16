@@ -1,4 +1,8 @@
 body {
+  font-family: Roboto Mono;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 .App {
   text-align: center;
@@ -699,4 +703,133 @@ p {
   width: 45%;
   background-size: cover;
   background-position: center;
+}
+
+/*contact*/
+/*.contact-form {
+  display: flex;
+  width: 100%;
+}
+.contact-form form {
+  width: 50%;
+}
+.contact-illustration {
+  width: 50%;
+}
+.contact-illustration img {
+  width: 100%;
+}*/
+.mecontacter-section {
+  background-color: #f7f9fc;
+  padding: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 50px auto;
+  text-align: left;
+}
+
+.mecontacter-section h2 {
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-form form {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+  max-width: 600px;
+  margin-right: 20px;
+}
+
+.contact-form .form-label {
+  display: block;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.contact-form .form-control {
+  width: calc(
+    100% - 20px
+  ); /* Make the input width 100% minus the padding/margin */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.contact-form .form-control:focus {
+  border-color: #8fbc8f;
+  box-shadow: 0 0 5px #8fbc8f;
+}
+
+.contact-form .btn {
+  background-color: #8fbc8f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Make the button full width */
+}
+
+.contact-form .btn:hover {
+  background-color: #1dbe1d;
+}
+
+.contact-illustration {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-illustration img {
+  max-width: 100%;
+  height: auto;
+}
+
+.message-sent {
+  background-color: #d4edda;
+  color: #8fbc8f;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.mail-contact {
+  margin-top: 40px;
+  color: #333;
+  text-align: center;
+}
+
+.mail-contact a {
+  color: #8fbc8f;
+  text-decoration: none;
+}
+
+.mail-contact a:hover {
+  text-decoration: underline;
+}
+.mb-3 {
+  display: flex;
+  width: 90%;
+}
+.contact-form label textarea {
+  height: 115px;
+}
+.contact-send-btn {
+  padding-top: 125px;
 }

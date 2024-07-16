@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
-import trash from "../assets/images/trash.png";
-import update from "../assets/images/update.png";
+import Article from "./Article";
+import CategoryFilter from "./CategoryFilter";
 
 function ArticleList({ isAdmin, editMode, onEditArticle }) {
   const [articleList, setArticleList] = useState([]);
@@ -49,21 +48,6 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
     }
   };
 
-  const renderAdminButtons = (article) => {
-    if (!isAdmin || !editMode) return null;
-
-    return (
-      <div className="admin-buttons">
-        <div className="update-one" onClick={() => onEditArticle(article)}>
-          <img src={update} alt="update-icone" />
-        </div>
-        <div className="delete-one" onClick={() => deleteArticle(article._id)}>
-          <img src={trash} alt="trash-bin" />
-        </div>
-      </div>
-    );
-  };
-
   const getUniqueCategories = () => {
     const categories = articleList.flatMap(
       (article) => article.categories || []
@@ -73,57 +57,21 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
 
   return (
     <div>
-      <div className="category-filter">
-        {getUniqueCategories().map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategoryChange(category)}
-            className={selectedCategory === category ? "active" : ""}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+      <CategoryFilter
+        categories={getUniqueCategories()}
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
       <div className="article-list">
         {filteredArticles.map((article) => (
-          <div key={article._id} className="article">
-            <NavLink to={`/ArticleDetails/${article._id}`}>
-              <div
-                className="img-container"
-                style={{ backgroundImage: `url(${article.image})` }}
-              >
-                {/* L'image est définie comme arrière-plan */}
-              </div>
-
-              <div className="article-title">
-                <h2>
-                  {article.title
-                    ? article.title.length > 20
-                      ? article.title.slice(0, 20) + "..."
-                      : article.title
-                    : "title missing"}
-                </h2>
-              </div>
-
-              {article.categories && article.categories.length > 0 && (
-                <div className="category-tag">
-                  {article.categories[0]}{" "}
-                  {/* Affiche uniquement la première catégorie */}
-                </div>
-              )}
-
-              <div className="article-description">
-                <p>
-                  {article.description
-                    ? article.description.length > 50
-                      ? article.description.slice(0, 50) + "..."
-                      : article.description
-                    : "Description Missing"}
-                </p>
-              </div>
-            </NavLink>
-            {renderAdminButtons(article)}
-          </div>
+          <Article
+            key={article._id}
+            article={article}
+            isAdmin={isAdmin}
+            editMode={editMode}
+            onEditArticle={onEditArticle}
+            deleteArticle={deleteArticle}
+          />
         ))}
       </div>
     </div>
