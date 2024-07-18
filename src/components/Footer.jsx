@@ -38,7 +38,7 @@ function Footer() {
         </div>
         <div className="contact-footer">
           <div>
-            <a href="later">
+            <NavLink to="/contact">
               Me Contacter{" "}
               <FontAwesomeIcon
                 icon={faArrowRight}
@@ -47,7 +47,7 @@ function Footer() {
                   "--fa-secondary-color": "#ffffff",
                 }}
               />
-            </a>{" "}
+            </NavLink>
           </div>
           <div>
             {" "}
