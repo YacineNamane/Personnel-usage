@@ -229,9 +229,9 @@ form button:hover {
   background-color: papayawhip;
 }
 .category-filter button {
-  background-color: white;
-  color: rgb(245, 174, 59);
-  border: 1px solid rgb(245, 174, 59);
+  border: 1px solid white;
+  background-color: papayawhip;
+  color: white;
   height: 45px;
   padding: 10px;
   border-radius: 30px;
@@ -246,9 +246,10 @@ form button:hover {
 
 .category-filter button.active {
   font-weight: bold;
-  border: 1px solid white;
-  background-color: papayawhip;
-  color: white;
+  background-color: white;
+  color: rgb(245, 174, 59);
+  border: 1px solid rgb(245, 174, 59);
+
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-thickness: 2px;
@@ -557,7 +558,6 @@ footer {
   gap: 50px;
   width: 100%;
   background-color: black;
-  border-radius: 40px 40px 0px 0px;
 }
 .footer-main {
   display: flex;
@@ -836,8 +836,8 @@ p {
   }
 
   .menu-icon img {
-    width: 30px;
-    height: 30px;
+    width: 37px;
+    height: 37px;
   }
 
   .sign-out-btncontainer {
@@ -914,6 +914,58 @@ p {
   }
   .Logo-nav-mobile {
     height: 180px;
+  }
+
+  /*accueil*/
+  .Typewriter {
+    width: 85%;
+  }
+  .Typewriter span {
+    font-size: 1.5em;
+  }
+  /*blog*/
+
+  .category-filter button {
+    width: 60%;
+    font-size: 0.9em;
+  }
+
+  .category-filter {
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+  }
+
+  .article-list {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    gap: 95px;
+  }
+
+  .article {
+    width: 90%;
+    height: 500px;
+  }
+  .article-details {
+    height: 100%;
+  }
+  .article-image-detail {
+    height: 500px;
+    width: 100%;
+  }
+
+  /*Login */
+
+  form {
+    width: 90%;
+    border-radius: 25px;
+  }
+  .login-img {
+    display: none;
+  }
+  form h2 {
+    font-size: 2em;
   }
 }
 
