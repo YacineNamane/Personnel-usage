@@ -27,10 +27,10 @@ body {
 .Banner nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid darkseagreen;
   width: 70%;
   height: 50px;
-  padding: 2%;
-  gap: 15%;
   font-size: 1.2em;
 }
 .Banner nav a {
@@ -542,7 +542,7 @@ button {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 100vh;
+  height: 45vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -816,6 +816,108 @@ p {
   padding-top: 125px;
 }
 
+/*Search Bar */
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 857px;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.search-bar-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.search-bar:focus {
+  border-color: #007bff;
+}
+
+.search-results-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-results {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  max-height: 400px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 600px;
+}
+
+.search-result-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-title {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.search-result-title:hover {
+  color: #007bff;
+}
+
+.no-results {
+  padding: 10px;
+  color: #777;
+  text-align: center;
+}
+
+.weather {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.weather img {
+  height: 65px;
+  width: 65px;
+}
+.weather p {
+  color: papayawhip;
+}
+
+.weather-container {
+  flex: 1;
+  max-width: 300px;
+}
+
 /*Responsive Mobile*/
 
 @media (max-width: 768px) {
@@ -862,11 +964,11 @@ p {
     padding: 20px;
     z-index: 999;
     transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out; /* Ajout de la transition */
+    transition: transform 0.3s ease-in-out;
   }
 
   .mobile-menu.open {
-    transform: translateX(0); /* Déplacer le menu vers la gauche */
+    transform: translateX(0);
   }
 
   .close-icon {
@@ -914,6 +1016,11 @@ p {
   }
   .Logo-nav-mobile {
     height: 180px;
+  }
+  /*search bar & results*/
+  .search-results {
+    max-width: 600px;
+    width: 100%;
   }
 
   /*accueil*/
