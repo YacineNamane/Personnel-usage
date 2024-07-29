@@ -7,13 +7,15 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
   const [articleList, setArticleList] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Tous");
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 9;
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const response = await axios.get("http://localhost:4000/api/articles");
         setArticleList(response.data.articles);
-        setFilteredArticles(response.data.articles); // Initialize with all articles
+        setFilteredArticles(response.data.articles);
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
@@ -39,6 +41,7 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+    setCurrentPage(1); // quand on change de category je me position sur la première page
     if (category === "Tous") {
       setFilteredArticles(articleList);
     } else {
@@ -55,6 +58,17 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
     return ["Tous", ...new Set(categories)];
   };
 
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticles = filteredArticles.slice(
+    indexOfFirstArticle,
+    indexOfLastArticle
+  );
+
+  const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <CategoryFilter
@@ -63,7 +77,7 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
         onCategoryChange={handleCategoryChange}
       />
       <div className="article-list">
-        {filteredArticles.map((article) => (
+        {currentArticles.map((article) => (
           <Article
             key={article._id}
             article={article}
@@ -73,6 +87,29 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
             deleteArticle={deleteArticle}
           />
         ))}
+      </div>
+      <div className="pagination">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Précédent
+        </button>
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => paginate(index + 1)}
+            className={currentPage === index + 1 ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Suivant
+        </button>
       </div>
     </div>
   );
