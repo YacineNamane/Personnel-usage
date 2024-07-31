@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchArticles, deleteArticle } from "../Api.js";
 import Article from "./Article";
 import CategoryFilter from "./CategoryFilter";
 
@@ -11,24 +11,22 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
   const articlesPerPage = 9;
 
   useEffect(() => {
-    const fetchArticles = async () => {
+    const loadArticles = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/articles");
-        setArticleList(response.data.articles);
-        setFilteredArticles(response.data.articles);
+        const articles = await fetchArticles();
+        setArticleList(articles);
+        setFilteredArticles(articles);
       } catch (error) {
-        console.error("Error fetching articles:", error);
+        console.error("Error loading articles:", error);
       }
     };
 
-    fetchArticles();
+    loadArticles();
   }, []);
 
-  const deleteArticle = async (articleId) => {
+  const handleDeleteArticle = async (articleId) => {
     try {
-      await axios.delete(
-        `http://localhost:4000/api/articles/delete/${articleId}`
-      );
+      await deleteArticle(articleId);
       const updatedArticles = articleList.filter(
         (article) => article._id !== articleId
       );
@@ -38,7 +36,6 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
       console.error("Error deleting article:", error);
     }
   };
-
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1); // quand on change de category je me position sur la première page
@@ -84,7 +81,7 @@ function ArticleList({ isAdmin, editMode, onEditArticle }) {
             isAdmin={isAdmin}
             editMode={editMode}
             onEditArticle={onEditArticle}
-            deleteArticle={deleteArticle}
+            deleteArticle={handleDeleteArticle}
           />
         ))}
       </div>

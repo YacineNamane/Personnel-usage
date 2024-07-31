@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { addArticle, updateArticle } from "../Api.js";
 
 function AddArticleForm({ articles, setArticles, articleToEdit }) {
   const [title, setTitle] = useState("");
@@ -15,7 +15,7 @@ function AddArticleForm({ articles, setArticles, articleToEdit }) {
       setCategories(articleToEdit.categories || "Bien dans ma tête");
       setImage(articleToEdit.image || null);
 
-      // Convertir la date en format yyyy-MM-dd si nécessaire
+      // Convertir la date en format yyyy-MM-dd
       const formattedDate = articleToEdit.date
         ? new Date(articleToEdit.date).toISOString().split("T")[0]
         : "";
@@ -42,49 +42,25 @@ function AddArticleForm({ articles, setArticles, articleToEdit }) {
     formData.append("date", date);
 
     try {
-      let response;
+      let data;
       if (articleToEdit) {
-        response = await axios.put(
-          `http://localhost:4000/api/articles/update/${articleToEdit._id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+        data = await updateArticle(articleToEdit._id, formData);
+        setArticles(
+          articles.map((article) =>
+            article._id === data.article._id ? data.article : article
+          )
         );
       } else {
-        response = await axios.post(
-          "http://localhost:4000/api/articles/add",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        data = await addArticle(formData);
+        setArticles([...articles, data.article]);
       }
 
-      if (response.status === 200 || response.status === 201) {
-        const data = response.data;
-        if (articleToEdit) {
-          setArticles(
-            articles.map((article) =>
-              article._id === data.article._id ? data.article : article
-            )
-          );
-        } else {
-          setArticles([...articles, data.article]);
-        }
-        setTitle("");
-        setDescription("");
-        setCategories("Bien dans ma tête");
-        setImage(null);
-        setDate("");
-        console.log(data);
-      } else {
-        console.error("Failed to save article");
-      }
+      // Reset form fields
+      setTitle("");
+      setDescription("");
+      setCategories("Bien dans ma tête");
+      setImage(null);
+      setDate("");
     } catch (error) {
       console.error("Error saving article:", error);
     }
