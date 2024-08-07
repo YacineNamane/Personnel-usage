@@ -13,8 +13,8 @@ function Article({ article, isAdmin, editMode, onEditArticle, deleteArticle }) {
         <div className="article-title">
           <h2>
             {article.title
-              ? article.title.length > 20
-                ? article.title.slice(0, 20) + "..."
+              ? article.title.length > 40
+                ? article.title.slice(0, 40) + "..."
                 : article.title
               : "title missing"}
           </h2>
@@ -28,20 +28,22 @@ function Article({ article, isAdmin, editMode, onEditArticle, deleteArticle }) {
         <div className="article-description">
           <p>
             {article.description
-              ? article.description.length > 50
-                ? article.description.slice(0, 50) + "..."
+              ? article.description.length > 120
+                ? article.description.slice(0, 120) + "..."
                 : article.description
               : "Description Missing"}
           </p>
         </div>
       </NavLink>
-      {isAdmin && editMode && (
-        <AdminButtons
-          article={article}
-          onEditArticle={onEditArticle}
-          deleteArticle={deleteArticle}
-        />
-      )}
+      <div>
+        {isAdmin && editMode && (
+          <AdminButtons
+            article={article}
+            onEditArticle={onEditArticle}
+            deleteArticle={deleteArticle}
+          />
+        )}
+      </div>
     </div>
   );
 }

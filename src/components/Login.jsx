@@ -50,7 +50,12 @@ const LoginForm = ({ onSubmit }) => {
         className={`login-form ${shouldAnimate ? "pop-in-right" : ""}`}
         onSubmit={handleSubmit}
       >
-        <h2>Se connecter </h2>
+        <h2>Login</h2>
+        <p>
+          Important! : Cet espace est resérver a l'admin de ce site , vous avez
+          un soucie lié au site ? une ambiguité ? faite le moi savoir en me
+          contactons
+        </p>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="form-info-section">
           <label htmlFor="email">Email:</label>

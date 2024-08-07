@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import SearchResult from "../components/SearchResult";
 import Weather from "../components/Weather";
-import vod from "../assets/images/landingbg.mp4";
+import InfoHome from "../components/InfoHome";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,15 +17,12 @@ function Home() {
     <div>
       <NavPannel />
       <div className="search-container">
-        <video className="background-video" autoPlay muted loop>
-          <source src={vod} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
         <Weather />
         <SearchBar onSearch={handleSearch} />
         <SearchResult searchTerm={searchTerm} />
+        <Type />
       </div>
-      <Type />
+      <InfoHome />
       <Footer />
     </div>
   );

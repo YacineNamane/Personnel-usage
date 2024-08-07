@@ -19,7 +19,7 @@ function NavPannel() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      if (scrollPosition > 50) {
+      if (scrollPosition > 100) {
         setScrollClass("scrolled");
       } else {
         setScrollClass("");

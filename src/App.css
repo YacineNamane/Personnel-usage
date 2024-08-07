@@ -69,13 +69,13 @@ body {
   color: darkseagreen;
 }
 .Banner.scrolled {
-  background-color: papayawhip !important; /* Couleur de fond lorsqu'il est défilé */
+  background-color: aliceblue !important; /* Couleur de fond lorsqu'il est défilé */
   color: #fff !important; /* Couleur du texte lorsqu'il est défilé */
   border-bottom: 1px solid darkseagreen;
   z-index: 1000;
 }
 .Banner.scrolled button {
-  background-color: papayawhip;
+  background-color: aliceblue;
 }
 .sign-out-btncontainer {
   display: flex;
@@ -139,7 +139,14 @@ form {
 form h2 {
   font-size: 3em;
   color: rgb(67 64 64);
-  padding-bottom: 150px;
+}
+.login-form p {
+  padding: 20px;
+  font-weight: 0.5em;
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
+  color: rgb(238, 142, 142);
 }
 form input,
 form label {
@@ -436,9 +443,9 @@ button {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 2230px;
-  padding: 50px;
-  gap: 5%;
+  justify-content: flex-start;
+  padding: 20px;
+
   background-color: papayawhip;
 }
 .article-list a {
@@ -447,9 +454,12 @@ button {
 }
 
 .article {
-  width: 29%;
+  width: 26.7%;
   height: 550px;
   transition: all 0.5s ease 0s !important;
+  margin: 30px;
+  border: 1px solid aliceblue;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .article:hover {
   box-shadow: -1px 0px 13px #f0f0f0;
@@ -457,7 +467,7 @@ button {
 }
 
 .img-container {
-  height: 65%;
+  height: 55%;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -474,8 +484,9 @@ button {
   height: 5%;
   font-size: 0.9em;
   padding-bottom: 1px;
+  transition: all 0.5s ease 0s !important;
 }
-.category-tag:hover {
+.article:hover .category-tag {
   background-color: darkseagreen !important;
   color: azure;
   border: 1px solid #f0f0f0;
@@ -485,9 +496,10 @@ button {
 .article-title {
   color: rgb(67 64 64);
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
   box-sizing: border-box;
   height: 15%;
-  padding: 5%;
 }
 .article-title h2 {
   color: rgb(67 64 64);
@@ -500,7 +512,7 @@ button {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  height: 15%;
+  height: 25%;
   padding: 5%;
   position: relative;
 }
@@ -510,6 +522,10 @@ button {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+  font-size: 0.8em;
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
 }
 
 .button-add-category {
@@ -522,9 +538,11 @@ button {
   align-items: center;
   justify-content: center;
   gap: 20%;
-  padding-top: 20px;
+  padding-top: 8px;
 }
 .admin-buttons img {
+  width: 40px;
+  height: 40px;
   opacity: 0.4;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -580,25 +598,64 @@ button {
 .Typewriter {
   display: flex;
   align-items: center;
-  height: 600px;
-  width: 70%;
+  align-self: flex-end;
+  bottom: 0;
+  position: absolute;
+  height: 100px;
 }
 .Typewriter span {
   color: rgb(67 64 64);
-  font-size: 2.2em;
+  font-size: 1.9em;
 }
 .background-home {
-  background-image: url("./assets/images/Naturotherapy.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  height: 45vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
 }
+.category-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 50px;
+  gap: 70px;
+  background-color: aliceblue;
+}
+.main-category-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.category-description h3 {
+  color: darkseagreen;
+  font-weight: bold;
+}
+.category-description a {
+  font-weight: bold;
+  color: darkseagreen;
+}
+.category-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  gap: 50px;
+  width: 40%;
+}
+.category-part p {
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
+}
+.send-to-blog {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: bold;
+  color: #333;
+}
 /* Footer */
 footer {
   display: flex;
@@ -650,13 +707,12 @@ footer {
 }
 .contact-footer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 13px;
   height: 180px;
   width: 33%;
-  border-left: 1px solid #f0f0f0;
 }
 .footer-personnel-info {
   display: flex;
@@ -664,7 +720,7 @@ footer {
   justify-content: center;
   flex-direction: column;
   width: 33%;
-  gap: 40px;
+  gap: 5px;
 }
 .rights {
   font-size: 0.8em;
@@ -684,19 +740,18 @@ span {
 }
 .nav-footer-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 13px;
   height: 180px;
-  width: 33%;
-  border-left: 1px solid #f0f0f0;
+  width: 15%;
 }
 .nav-footer-container nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   gap: 8px;
 }
 .nav-footer-container nav a {
@@ -737,6 +792,9 @@ span {
 .article-info-detail h2,
 p {
   color: rgb(67 64 64);
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
 }
 .article-image-detail {
   display: flex;
@@ -752,10 +810,15 @@ p {
 
 .mecontacter-section {
   background-color: #f7f9fc;
-  padding: 135px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
+  max-width: 100%;
+  height: 1280px;
+  gap: 25px;
   text-align: left;
 }
 
@@ -822,6 +885,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 850px;
 }
 
 .contact-illustration img {
@@ -868,19 +932,14 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 120px;
+  background-image: url("./assets/images/backgroundSearch.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   width: 100%;
-  height: 857px;
-}
-
-.background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  height: 100vh;
 }
 
 .search-bar-container {
@@ -900,7 +959,7 @@ p {
 }
 
 .search-bar:focus {
-  border-color: #007bff;
+  border-color: darkseagreen;
 }
 
 .search-results-container {
@@ -937,7 +996,7 @@ p {
 }
 
 .search-result-title:hover {
-  color: #007bff;
+  color: darkseagreen;
 }
 
 .no-results {
@@ -1086,13 +1145,15 @@ p {
   .article-list {
     flex-direction: column;
     flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
     height: 100%;
-    gap: 95px;
   }
 
   .article {
-    width: 90%;
+    width: 65%;
     height: 500px;
+    border: 1px solid aliceblue;
   }
   .article-details {
     height: 100%;
