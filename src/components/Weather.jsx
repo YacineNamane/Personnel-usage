@@ -40,11 +40,11 @@ function Weather() {
               src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
               alt={weather.weather[0].description}
             />
+          </div>
+          <div className="weather-details">
             <p>
               <strong>{weather.name}</strong> {/* Nom de la ville */}
             </p>
-          </div>
-          <div className="weather-details">
             <p>
               {Math.round(weather.main.temp)}°C <br />{" "}
               {weather.weather[0].description}

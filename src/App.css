@@ -1,12 +1,12 @@
 body {
-  font-family: Roboto Mono;
+  font-family: "Merriweather", serif;
   margin: 0;
   padding: 0;
   color: #333;
 }
 .App {
   text-align: center;
-  font-family: Roboto Mono;
+  font-family: "Merriweather", serif;
 }
 .Banner {
   position: fixed;
@@ -599,7 +599,7 @@ button {
   display: flex;
   align-items: center;
   align-self: flex-end;
-  bottom: 0;
+  bottom: 75px;
   position: absolute;
   height: 100px;
 }
@@ -639,7 +639,6 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   gap: 50px;
   width: 40%;
 }
@@ -656,6 +655,59 @@ button {
   font-weight: bold;
   color: #333;
 }
+.website-goal {
+  height: 100vh;
+  background-image: url("./assets/images/mentalcuree.png");
+  background-size: cover;
+  background-position: center;
+}
+.website-goal-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 50px;
+}
+.website-goal-description p {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  top: -175px;
+  right: -10px;
+  z-index: 1000;
+  padding: 20px;
+}
+.wg-d-section {
+  margin-top: 70px;
+  width: 443px;
+  height: 255px;
+  background: aliceblue;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 118px;
+  padding: 12px;
+}
+.wg-d-section::after,
+.wg-d-section::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: inherit;
+  border-radius: inherit;
+}
+.wg-d-section::after {
+  width: 123px;
+  height: 123px;
+  top: -440px;
+
+  left: -67px;
+}
+
+.wg-d-section::before {
+  width: 203px;
+  height: 196px;
+  top: -104px;
+  left: 42px;
+}
 /* Footer */
 footer {
   display: flex;
@@ -664,41 +716,46 @@ footer {
   flex-direction: column;
   gap: 50px;
   width: 100%;
-  background-color: black;
+  background-color: #262c26;
 }
 .footer-main {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   align-items: center;
-  padding: 3px;
-  height: 300px;
-  width: 85%;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 5px;
+  height: 400px;
+  width: 100%;
+  border-bottom: 1px solid #a7b0a6;
 }
 #logof {
   height: 200px;
 }
 .contact-footer a {
-  color: white;
-  text-decoration: none;
+  color: #a7b0a6;
+
   transition: 0.5s ease, color 0.3s ease;
 }
 .contact-footer a:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
+  color: aliceblue;
+}
+.contact-footer h3 {
+  font-size: 1.4em;
+  color: white;
 }
 .ml-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 120px;
-  width: 33%;
+  justify-content: flex-start;
+  height: 180px;
+  width: 30%;
   border-left: 1px solid #f0f0f0;
 }
 .ml-container a {
-  color: white;
+  color: #a7b0a6;
   text-decoration: none;
   transition: 0.5s ease, color 0.3s ease;
 }
@@ -708,29 +765,37 @@ footer {
 .contact-footer {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  gap: 13px;
+  gap: 11px;
   height: 180px;
-  width: 33%;
+  width: 30%;
+  font-size: 12px;
 }
 .footer-personnel-info {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
-  width: 33%;
+  width: 30%;
+  height: 180px;
   gap: 5px;
 }
 .rights {
   font-size: 0.8em;
-  color: white;
+  color: #a7b0a6;
 }
 span {
-  color: white;
+  color: #a7b0a6;
+  gap: 5px;
+  display: flex;
 }
 .span-f-info {
   height: 50px;
+}
+span img {
+  height: 16px;
+  width: 16px;
 }
 .logo-footer {
   display: flex;
@@ -741,35 +806,37 @@ span {
 .nav-footer-container {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   gap: 13px;
   height: 180px;
   width: 15%;
+  font-size: 12px;
 }
 .nav-footer-container nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
 }
 .nav-footer-container nav a {
   width: 100%;
-  text-decoration: none;
-  color: white;
+  color: #a7b0a6;
   position: relative;
   display: inline-block;
   vertical-align: middle;
+  font-size: 12px;
   transition: 0.5s ease, color 0.3s ease;
 }
 .nav-footer-container a:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
+  color: aliceblue;
 }
 .nav-footer-container h3 {
-  font-size: 1.2em;
+  font-size: 1.4em;
   color: white;
 }
 
@@ -824,7 +891,7 @@ p {
 
 .mecontacter-section h2 {
   color: #333;
-  font-family: "Roboto", sans-serif;
+  font-family: "Merriweather", serif;
   font-size: 28px;
   margin-bottom: 20px;
   text-align: center;
@@ -833,6 +900,7 @@ p {
 .contact-form {
   display: flex;
   justify-content: space-between;
+  font-family: "Merriweather", serif;
 }
 
 .contact-form form {
@@ -842,6 +910,7 @@ p {
   width: 100%;
   max-width: 600px;
   margin-right: 20px;
+  font-family: "Merriweather", serif;
 }
 
 .contact-form .form-label {
@@ -850,6 +919,7 @@ p {
   font-weight: bold;
   margin-bottom: 10px;
   width: 100%;
+  font-family: "Merriweather", serif;
 }
 
 .contact-form .form-control {
@@ -859,6 +929,7 @@ p {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+  font-family: "Merriweather", serif;
 }
 
 .contact-form .form-control:focus {
@@ -920,6 +991,7 @@ p {
   width: 90%;
 }
 .contact-form label textarea {
+  font-family: "Merriweather", serif;
   height: 115px;
 }
 .contact-send-btn {
@@ -1015,6 +1087,7 @@ p {
   width: 65px;
 }
 .weather p {
+  text-align: center;
   color: papayawhip;
 }
 

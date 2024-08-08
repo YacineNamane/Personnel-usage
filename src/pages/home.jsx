@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar";
 import SearchResult from "../components/SearchResult";
 import Weather from "../components/Weather";
 import InfoHome from "../components/InfoHome";
+import ObjectifSite from "../components/ObjectifSite";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,6 +24,7 @@ function Home() {
         <Type />
       </div>
       <InfoHome />
+      <ObjectifSite />
       <Footer />
     </div>
   );
