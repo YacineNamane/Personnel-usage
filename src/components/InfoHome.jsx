@@ -36,12 +36,12 @@ function InfoHome() {
         </div>
       </div>
       <div className="send-to-blog">
-        <div>
-          Vous trouverez les articles que j'ai rédiger moi même{" "}
+        <div className="redirect-home">
+          Vous trouverez les articles que j'ai déjà rédiger{" "}
           <NavLink to="/blog">ici</NavLink>
         </div>
-        <div>
-          Si vous avez des question Hésitez pas a me contacter{" "}
+        <div className="redirect-home">
+          Si vous avez des question vous pouvez me contacter{" "}
           <NavLink to="/contact">ici</NavLink>
         </div>
       </div>

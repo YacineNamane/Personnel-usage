@@ -12,10 +12,10 @@ function ObjectifSite() {
         </div>{" "}
         <div className="wg-d-section">
           <p>
-            "Mon but est d'offrir des conseils pratiques et des informations
-            fiables pour vous aider à prendre soin de vous de manière naturelle.
-            j'espère que vous trouverez ici des réponses à vos questions pour
-            améliorer votre bien-être au quotidien."{" "}
+            "Mon but est d'offrir des conseils pratiques pour vous aider à
+            prendre soin de vous de manière naturelle. j'espère que vous
+            trouverez ici des réponses à vos questions pour améliorer votre
+            bien-être au quotidien."{" "}
           </p>
         </div>
       </div>
